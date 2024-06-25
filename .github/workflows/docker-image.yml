@@ -36,4 +36,4 @@ jobs:
         file: faiss-base.dockerfile
         push: true # Will only build if this is not here
         tags: |
-          farhannz/faiss-base:latest
+          farhannz/faiss-base:sm60
