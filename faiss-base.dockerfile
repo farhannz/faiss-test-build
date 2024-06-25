@@ -1,6 +1,6 @@
 
 
-FROM nvidia/cuda:12.0.0-cudnn8-devel-ubuntu22.04 as gpu
+FROM nvidia/cuda:11.4.3-cudnn8-devel-ubuntu20.04 as gpu
 
 RUN apt-get update && \
     apt-get install -y wget git automake build-essential gpg-agent &&\
@@ -30,7 +30,7 @@ RUN apt-get update && apt-get -y install python3 python3-dev python3-pip &&\
 
 RUN git clone -b v1.8.0 https://github.com/facebookresearch/faiss.git && \
     cd faiss &&\
-    MKLROOT=/opt/intel/oneapi/mkl/2024.1 cmake -B build -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON -DFAISS_ENABLE_GPU=ON -DFAISS_ENABLE_RAFT=OFF -DPYTHON_EXECUTABLE=$(which python3) -DCMAKE_BUILD_TYPE=Release -DBLA_VENDOR=Intel10_64_dyn DCUDAToolkit_ROOT=/usr/local/cuda -DCMAKE_CUDA_ARCHITECTURES="60" . &&\
+    MKLROOT=/opt/intel/oneapi/mkl/2024.1 cmake -B build -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON -DFAISS_ENABLE_GPU=ON -DFAISS_ENABLE_RAFT=OFF -DPYTHON_EXECUTABLE=$(which python3) -DCMAKE_BUILD_TYPE=Release -DBLA_VENDOR=Intel10_64_dyn DCUDAToolkit_ROOT=/usr/local/cuda -DCMAKE_CUDA_ARCHITECTURES="75;70;60;61;80;86" . &&\
     make -k -C build  && (cd build/faiss/python && python3 setup.py install)
 
 WORKDIR /app

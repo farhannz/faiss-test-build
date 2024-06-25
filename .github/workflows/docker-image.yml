@@ -36,4 +36,4 @@ jobs:
         file: faiss-base.dockerfile
         push: true # Will only build if this is not here
         tags: |
-          farhannz/faiss-base:sm60
+          farhannz/faiss-base:cuda11.4
